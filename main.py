@@ -6,8 +6,6 @@ from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 
 GUI = Builder.load_file("tela.kv")
-arquivo_xlsx= 'planilhamodel.xlsx'
-arquivo_docx = 'ofcmodelo.docs'
 # Lê os dados da planilha usando o Pandas
 
 class ODsoftware(App):
@@ -24,13 +22,17 @@ class ODsoftware(App):
         arquivo_xlsx = self.root.ids.xlsx
         arquivo_docx = self.root.ids.docx
         
-        planilha = pd.read_excel(arquivo_xlsx)  # Substitua "sua_planilha.xlsx" pelo caminho da sua planilha
+        
+        planilha = pd.read_excel(f'{arquivo_xlsx.text}')  # Substitua "sua_planilha.xlsx" pelo caminho da sua planilha
         for index, row in planilha.iterrows():
-            C1 = row["C1"]  # Substitua "Nome" pelo nome da coluna na planilha
-            C2 = row["C2"]  # Substitua "Endereço" pelo nome da coluna na planilha
-
+            C1 = row["C1"]  
+            C2 = row["C2"]  
+            C3 = row["C3"]  
+            C4 = row["C4"]
+            C5 = row["C5"] 
+            C6 = row["C6"]
             # Abre um novo modelo de documento para cada iteração
-            documento_modelo = Document(arquivo_docx)  # Substitua "modelo.docx" pelo caminho do seu modelo de documento
+            documento_modelo = Document(f'{arquivo_docx.text}')  # Substitua "modelo.docx" pelo caminho do seu modelo de documento
 
             # Aqui você pode adicionar mais campos conforme necessário
 
@@ -39,7 +41,15 @@ class ODsoftware(App):
                 if "{C1}" in paragraph.text:
                     paragraph.text = paragraph.text.replace("{C1}", str(C1))
                 if "{C2}" in paragraph.text:
-                    paragraph.text = paragraph.text.replace("{C2}", C2)
+                    paragraph.text = paragraph.text.replace("{C2}", str(C2))
+                if "{C3}" in paragraph.text:
+                    paragraph.text = paragraph.text.replace("{C3}", str(C3))
+                if "{C4}" in paragraph.text:
+                    paragraph.text = paragraph.text.replace("{C4}", str(C4))
+                if "{C5}" in paragraph.text:
+                    paragraph.text = paragraph.text.replace("{C5}", str(C5))
+                if "{C6}" in paragraph.text:
+                    paragraph.text = paragraph.text.replace("{C6}", str(C6))
             # Salva o documento com um nome único, por exemplo, com base no nome da pessoa
             documento_modelo.save(f"Ofício Nº{C1} - {C2}.docx")
 

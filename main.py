@@ -1,12 +1,11 @@
 import pandas as pd
 from docx import Document
-import random  # Para gerar dados aleatórios (nomes, endereços, etc.)
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 
 GUI = Builder.load_file("tela.kv")
-# Lê os dados da planilha usando o Pandas
+
 
 class ODsoftware(App):
     def build(self):
@@ -23,7 +22,7 @@ class ODsoftware(App):
         arquivo_docx = self.root.ids.docx
         
         
-        planilha = pd.read_excel(f'{arquivo_xlsx.text}')  # Substitua "sua_planilha.xlsx" pelo caminho da sua planilha
+        planilha = pd.read_excel(f'{arquivo_xlsx.text}') 
         for index, row in planilha.iterrows():
             C1 = row["C1"]  
             C2 = row["C2"]  
@@ -32,8 +31,7 @@ class ODsoftware(App):
             C5 = row["C5"] 
             C6 = row["C6"]
             # Abre um novo modelo de documento para cada iteração
-            documento_modelo = Document(f'{arquivo_docx.text}')  # Substitua "modelo.docx" pelo caminho do seu modelo de documento
-
+            documento_modelo = Document(f'{arquivo_docx.text}')  
             # Aqui você pode adicionar mais campos conforme necessário
 
             # Preenche o documento modelo com os dados
@@ -51,7 +49,9 @@ class ODsoftware(App):
                 if "{C6}" in paragraph.text:
                     paragraph.text = paragraph.text.replace("{C6}", str(C6))
             # Salva o documento com um nome único, por exemplo, com base no nome da pessoa
-            documento_modelo.save(f"Ofício Nº{C1} - {C2}.docx")
+            cont = 1
+            documento_modelo.save(f"Ofício Nº{cont}.docx")
+            cont = cont+1
 
 
 

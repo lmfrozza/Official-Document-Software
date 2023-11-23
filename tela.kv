@@ -1,34 +1,63 @@
 BoxLayout:
     orientation: "vertical"
     padding: 50
+    canvas.before:
+        Color:
+            rgba: 0.6, 0.7, 0.9, 1  # Cor de fundo (azul claro)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    
     Label:  
         text: 'Official Document Software'
-        font_size: 20 
+        font_size: 40
+        font_name: 'Arial'  # Fonte alterada para Arial
+        color: 0, 0.1, 0.3, 1  # Cor do texto (azul escuro)
+        size_hint_y: None
+        height: 60 
     
     BoxLayout:
         orientation: 'vertical'
-        spacing: 5
+        spacing: 10
+        
         BoxLayout:
             orientation: 'vertical'
+            padding: 5
+            
             Label:
                 text: 'Insira o caminho .docx'
                 font_size: 14
-                padding: 5
+                bold: True
+                size_hint_y: None
+                height: 30
+            
             TextInput: 
                 id: docx
                 multiline: False
                 padding: 5
+                size_hint_y: None
+                height: 30
+            
             Label:
                 text: 'Insira o caminho .xlsx'
                 font_size: 14
-                padding: 5
+                bold: True
+                size_hint_y: None
+                height: 30
+            
             TextInput: 
                 id: xlsx
                 multiline: False
                 padding: 5
+                size_hint_y: None
+                height: 30
+        
         BoxLayout:
+            spacing: 10
+            
             Button:
                 id: button
-                text: 'Iniciate'
+                text: 'Iniciar'
                 size_hint: (0.25, 0.5)
                 padding: 15
+                background_color: 0, 0.1, 0.3, 1  # Cor do botão (azul marinho)

@@ -20,8 +20,6 @@ class ODsoftware(App):
     def iniciate(self, instance):
         arquivo_xlsx = self.root.ids.xlsx
         arquivo_docx = self.root.ids.docx
-        
-        
         planilha = pd.read_excel(f'{arquivo_xlsx.text}') 
         for index, row in planilha.iterrows():
             C1 = row["C1"]  
@@ -52,7 +50,4 @@ class ODsoftware(App):
             cont = 1
             documento_modelo.save(f"Ofício Nº{cont}.docx")
             cont = cont+1
-
-
-
 ODsoftware().run()
